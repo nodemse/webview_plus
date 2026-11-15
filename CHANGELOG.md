@@ -1,3 +1,7 @@
+## 0.9.6
+- Update Flutter and Dart version.
+- Change the default render on Android to `hybridComposition` (enable HCPP in `AndroidManifest.xml` for smooth WebView performance on Android 14+).
+
 ## 0.9.5
 Linux: secondary windows, text input, DevTools, notes bug
 - **Secondary windows: the runner must create every window through `FlApplication::create_window`.** In 0.9.4 a secondary window (Flutter multi-window API) had no `GtkOverlay`, so the plugin fell back to texture mode, which floods the console with `glGetError 501` (an engine bug in `FlPixelBufferTexture`) and can crash the app on first open. The plugin deliberately does NOT re-parent an existing `FlView` at runtime: that is what corrupted the engine's OpenGL context in 0.8.2. Instead, `example/linux/runner/my_application.cc` (+ `.h`) now derives from `FlApplication` and builds the `GtkWindow` + `GtkOverlay` + transparent `FlView` structure inside `create_window`, before the view is realized. The engine calls it for the main window AND for every secondary window, so both get the native, smooth embedded mode. Requires a Flutter SDK that ships `fl_application.h` (current stable/beta).

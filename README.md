@@ -10,7 +10,7 @@ Unlike other webview implementations that introduce complex virtualization layer
 
 | Platform | Encapsulated Native Component | Backend Layer / Architecture |
 | :--- | :--- | :--- |
-| **Android** | `android.webkit.Webview` | Native `PlatformView`, using **Texture Layer Hybrid Composition** by default (API 23+) — native-speed scrolling *and* smooth Flutter animations around it |
+| **Android** | `android.webkit.Webview` | Native `PlatformView`, using **Hybrid Composition** by default (with **HCPP** support on Android 14+ / API 34+ for ultra-smooth, zero-copy rendering) |
 | **iOS** | `WKWebview` (WebKit) | Native `UiKitView` (Full native composition) |
 | **macOS** | `WKWebview` (WebKit) | Native `AppKitView` (Full native composition) |
 | **Windows** | `Webview2` (Edge Chromium) | Win32 Composition over Flutter Direct3D Texture |
@@ -31,7 +31,7 @@ Unlike other webview implementations that introduce complex virtualization layer
 - **Advanced Asset & File System Access:** Load URLs, bundle assets, or absolute file paths from the local device storage. `allowFileAccessFromFileURLs`/`allowUniversalAccessFromFileURLs` unlock local-file-to-local-file access on iOS/macOS.
 - **Scrollbar Theming (Windows/macOS/Linux):** Custom track/thumb colors, width, and light/dark/auto/hidden modes via `windowsScrollbarTheme`, applied through native composition on Windows and injected `::-webkit-scrollbar` CSS on macOS/Linux.
 - **Cache & Debug Utilities:** `WebviewCacheManager` clears HTTP cache/cookies/all web data across every Webview in the app; `WebviewPlusController.setWebContentsDebuggingEnabled()` globally toggles remote DevTools/Web Inspector access.
-- **Android Rendering Performance:** Defaults to Texture Layer Hybrid Composition (`initSurfaceAndroidView`) on API 23+, giving native-speed scrolling without the janky Flutter animations/transitions that plague classic Hybrid Composition. Automatically falls back to legacy modes on older devices.
+- **Android Rendering Performance:** Defaults to `AndroidPlatformViewType.hybridComposition` (`initExpensiveAndroidView`). To get a **smooth, jank-free WebView** on Android 14+ (API 34+ with Vulkan), enable **HCPP (Hybrid Composition Plus Plus)** in your `AndroidManifest.xml`. You can also switch back to `surfaceComposition` (TLHC) on older Android versions if needed.
 - **Android Preloading API:** `WebviewPlusPreloader` lets you warm up the WebView engine and/or prefetch a URL into the shared HTTP cache *before* the user opens a webview screen, for a near-instant first paint. See [Preloading & Faster First Load](#-preloading--faster-first-load-android) below.
 - **Automatic Script Injection:** Declare a list of `UserScript`s in `initialSettings.initialUserScripts` to have them injected automatically into every page the webview loads (Android/iOS/macOS).
 - **Keyboard-Aware Layout Control:** `disableKeyboardResize` stops the webview from shrinking when the on-screen keyboard appears, using native IME insets rather than a JS `window.innerHeight` workaround (Android/iOS).
