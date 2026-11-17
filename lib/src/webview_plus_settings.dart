@@ -5,11 +5,11 @@ import 'webview_plus_user_script.dart';
 import 'webview_plus_desktop_scrollbar_theme.dart';
 
 enum AndroidPlatformViewType {
-  /// Texture Layer Hybrid Composition (recommandé, API 23+).
-  surfaceComposition,
-
   /// Hybrid Composition classique (génère parfois du jank d'animation, mais robuste).
   hybridComposition,
+
+  /// Texture Layer Hybrid Composition (recommandé, API 23+).
+  surfaceComposition,
 
   /// Virtual Display (TextureView). Défilement potentiellement moins fluide,
   /// mais très compatible avec le vieux matériel.
@@ -93,7 +93,7 @@ class WebviewSettings {
     this.disableLongPressContextMenuOnLinks = false,
     this.selectionTextColor,
     this.selectionHandleColor,
-    this.androidPlatformViewType = AndroidPlatformViewType.surfaceComposition,
+    this.androidPlatformViewType = AndroidPlatformViewType.hybridComposition,
     this.allowsBackForwardNavigationGestures = false,
     this.allowsLinkPreview = false,
     this.disabledDefaultContextMenuItems = const <DefaultContextMenuItem>{},
@@ -224,7 +224,7 @@ class WebviewSettings {
   final Color? selectionHandleColor;
 
   /// Type de composition et rendu sur Android.
-  /// Par défaut : [AndroidPlatformViewType.surfaceComposition].
+  /// Par défaut : [AndroidPlatformViewType.hybridComposition].
   final AndroidPlatformViewType androidPlatformViewType;
 
   /// Autorise les gestes de balayage pour naviguer précédent/suivant (iOS).

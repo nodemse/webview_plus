@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:webview_plus/webview_plus.dart';
 
 void main() {
@@ -122,7 +122,7 @@ class _WebviewDemoPageState extends State<WebviewDemoPage>
   bool _safeBrowsingEnabled = true;
   bool _allowMixedContent = false;
   AndroidPlatformViewType _androidPlatformViewType =
-      AndroidPlatformViewType.surfaceComposition;
+      AndroidPlatformViewType.hybridComposition;
   WebviewContentMode _webviewContentMode = WebviewContentMode.recommended;
 
   // -- iOS / macOS ------------------------------------------------------------
