@@ -1,6 +1,10 @@
 ## 0.9.6
 - Update Flutter and Dart version.
 - Change the default render on Android to `hybridComposition` (enable HCPP in `AndroidManifest.xml` for smooth WebView performance on Android 14+).
+- Android: make `dispose()` safer. The WebView is now removed from its parent view before `destroy()`, loading is stopped, and listeners (focus, long click, window insets) are cleared. This avoids native crashes when a page is disposed during a route transition.
+- Android: cancel all pending handler callbacks on `dispose()` (event delivery, transparent-background layer switch), so nothing touches the WebView after it is destroyed.
+- Android: `WebviewPlusEventChannel` no longer queues or delivers events after `unbind()`, which prevents late JS messages from piling up in the pending list.
+- Android: add an experimental `FORCE_HARDWARE_LAYER` constant (default `false`). The WebView no longer forces `LAYER_TYPE_HARDWARE`, which created an extra offscreen buffer per view; with HCPP this may reduce `SurfaceComposerClient` "release buffer callback, buffer not found" logs. Set it back to `true` if you notice visual glitches. The transparent background behavior is unchanged.
 
 ## 0.9.5
 Linux: secondary windows, text input, DevTools, notes bug
