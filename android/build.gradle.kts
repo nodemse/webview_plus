@@ -2,14 +2,14 @@ group = "me.noam.webview_plus"
 version = "1.0-SNAPSHOT"
 
 buildscript {
-    val kotlinVersion = "2.3.20"
+    val kotlinVersion = "2.4.21"
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:9.0.1")
+        classpath("com.android.tools.build:gradle:9.5.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     }
 }
@@ -27,7 +27,6 @@ plugins {
 
 android {
     namespace = "me.noam.webview_plus"
-
     compileSdk = 36
 
     compileOptions {
@@ -72,5 +71,5 @@ kotlin {
 }
 
 dependencies {
-    implementation("androidx.webkit:webkit:1.16.0")
+    implementation("androidx.webkit:webkit:1.17.1")
 }

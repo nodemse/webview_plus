@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
   A cross-platform Flutter plugin that directly encapsulates native WebViews (Android, iOS/macOS, Windows, Linux andWeb) with no WebView dependencies.
                        DESC
-  s.homepage         = 'https://github.com/Noamcreator/webview_plus'
+  s.homepage         = 'https://github.com/nodemse/webview_plus'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Noam' => 'noam.bourmault@gmail.com' }
 
